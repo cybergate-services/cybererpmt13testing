@@ -21,7 +21,10 @@ services:
       - STAGING=${STAGING}
       
     networks:
-      cybererp-network:
+      cybererp-network1:
+        aliases:
+          - letsencrypt
+      cybererp-network2:
         aliases:
           - letsencrypt
     volumes:
@@ -38,9 +41,12 @@ services:
     volumes:
       - './postgresql_data:/var/lib/postgresql/data'
     networks:
-      cybererp-network:
+      cybererp-network1:
         aliases:
-          - letsencrypt
+          - postgresql
+      cybererp-network2:
+        aliases:
+          - postgresql
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_USER=postgres
@@ -48,7 +54,7 @@ services:
     restart: always
     
   odoo_customer1:
-    image: 'bitnami/odoo:12'
+    image: 'cybergatelabs/odoo12'
     container_name: odoo_customer1
     hostname: odoo_customer1
     volumes:  
@@ -75,7 +81,7 @@ services:
     restart: always 
     
   odoo_customer2:
-    image: 'bitnami/odoo:12'
+    image: 'cybergatelabs/odoo12'
     container_name: odoo_customer2
     hostname: odoo_customer2
     volumes:  
