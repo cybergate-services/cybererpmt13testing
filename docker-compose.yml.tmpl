@@ -21,20 +21,11 @@ services:
       - STAGING=${STAGING}
       
     networks:
-      cybererp-network1:
-        aliases:
-          - letsencrypt
-      cybererp-network2:
+      cybererp-network:
         aliases:
           - letsencrypt
     volumes:
-     
-      - ./conf/proxy/odoo.conf:/config/nginx/proxy-confs/odoo.subdomain.conf:rw
-      - ./conf/proxy/pgadmin.conf:/config/nginx/proxy-confs/pgadmin.subdomain.conf:rw
-      - ./conf/proxy/portainer.conf:/config/nginx/proxy-confs/portainer.subdomain.conf:rw
-      - ./conf/proxy/duplicati.conf:/config/nginx/proxy-confs/duplicati.subdomain.conf:rw
-      - ./conf/htpasswd:/config/nginx/.htpasswd:rw
-     
+     - ./letsencrypt/config:/config 
     ports:
       - 443:443
       - 80:80 #optional
@@ -47,10 +38,7 @@ services:
     volumes:
       - './postgresql_data:/var/lib/postgresql/data'
     networks:
-      cybererp-network1:
-        aliases:
-          - letsencrypt
-      cybererp-network2:
+      cybererp-network:
         aliases:
           - letsencrypt
     environment:
@@ -79,6 +67,9 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PROTOCOL=ssl
     networks:
+      cybererp-network:
+        aliases:
+         - odoo_customer1    
       cybererp-network1:
         aliases:
          - odoo_customer1
@@ -106,6 +97,9 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PROTOCOL=ssl
     networks:
+      cybererp-network:
+        aliases:
+         - odoo_customer1
       cybererp-network2:
         aliases:
          - odoo_customer2
@@ -165,7 +159,18 @@ volumes:
     driver: local
   odoo_data: 
     driver: local
+    
 networks:
+  cybererp-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-cybererp
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.1.0/24
+
   cybererp-network1:
     driver: bridge
     driver_opts:
@@ -184,4 +189,8 @@ networks:
       driver: default
       config:
         - subnet: 172.27.1.0/24
+    
+   
+        
+     
         
