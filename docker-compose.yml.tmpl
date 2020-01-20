@@ -66,10 +66,7 @@ services:
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network:
-        aliases:
-         - odoo_customer1    
+    networks:    
       cybererp-network1:
         aliases:
          - odoo_customer1
@@ -97,9 +94,6 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PROTOCOL=ssl
     networks:
-      cybererp-network:
-        aliases:
-         - odoo_customer1
       cybererp-network2:
         aliases:
          - odoo_customer2
@@ -117,7 +111,10 @@ services:
     # depends_on:
     #  - postgresql
     networks:
-      cybererp-network:
+      cybererp-network1:
+        aliases:
+          - pgadmin
+      cybererp-network2:
         aliases:
           - pgadmin
  
@@ -130,7 +127,10 @@ services:
       - ./conf/portainer:/data
     restart: always
     networks:
-      cybererp-network:
+      cybererp-network1:
+        aliases:
+         - portainer
+      cybererp-network2:
         aliases:
          - portainer
   
@@ -151,7 +151,10 @@ services:
       - 8200:8200
     restart: always
     networks:
-      cybererp-network:
+      cybererp-network1:
+        aliases:
+         - duplicati
+      cybererp-network2:
         aliases:
          - duplicati
 volumes:
@@ -161,16 +164,6 @@ volumes:
     driver: local
     
 networks:
-  cybererp-network:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-cybererp
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.25.1.0/24
-
   cybererp-network1:
     driver: bridge
     driver_opts:
@@ -180,7 +173,7 @@ networks:
       driver: default
       config:
         - subnet: 172.26.1.0/24
-   cybererp-network2:
+  cybererp-network2:
     driver: bridge
     driver_opts:
       com.docker.network.bridge.name: br-cybererp
