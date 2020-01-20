@@ -49,9 +49,9 @@ services:
           - postgresql
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
       - POSTGRES_MULTIPLE_DATABASES="odoo_customer1,postgres:odoo_customer2,postgres"
+      - POSTGRESQL_USER=postgres
+      
     restart: always
     
   odoo_customer1:
