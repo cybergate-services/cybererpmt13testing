@@ -34,16 +34,30 @@ services:
       - 80:80 #optional
     restart: always
   
-  postgresql:
+  postgresql_1:
+    image: 'cybergatelabs/postgres-multi-db'
+    container_name: postgresql
+    hostname: postgresql
+    volumes:
+      - './postgresql_data:/var/lib/postgresql/data/'
+    networks:
+      cybererp-network1:
+        aliases:
+          - postgresql
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRES_MULTIPLE_DATABASES="odoo_customer1,odoo:odoo_customer2,odoo"
+      - POSTGRESQL_USER=odoo
+      
+    restart: always
+    
+  postgresql_2:
     image: 'cybergatelabs/postgres-multi-db'
     container_name: postgresql
     hostname: postgresql
     volumes:
       - './postgresql_data:/var/lib/postgresql/data'
     networks:
-      cybererp-network1:
-        aliases:
-          - postgresql
       cybererp-network2:
         aliases:
           - postgresql
@@ -174,7 +188,7 @@ networks:
   cybererp-network1:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: br-cybererp
+      com.docker.network.bridge.name: br-customer1
     enable_ipv6: false
     ipam:
       driver: default
@@ -183,7 +197,7 @@ networks:
   cybererp-network2:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: br-cybererp
+      com.docker.network.bridge.name: br-customer2
     enable_ipv6: false
     ipam:
       driver: default
