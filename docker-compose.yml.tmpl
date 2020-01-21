@@ -1,3 +1,4 @@
+
 version: '2.1'
 services:
  
@@ -35,36 +36,36 @@ services:
     restart: always
   
   postgresql_1:
-    image: 'cybergatelabs/postgres-multi-db'
-    container_name: postgresql
-    hostname: postgresql
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_1
+    hostname: postgresql_1
     volumes:
-      - './postgresql_data:/var/lib/postgresql/data/'
+      - './postgresql_1_data:/bitnami/postgresql'
     networks:
       cybererp-network1:
         aliases:
-          - postgresql
+          - postgresql_1
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRES_MULTIPLE_DATABASES="odoo_customer1,odoo:odoo_customer2,odoo"
-      - POSTGRESQL_USER=odoo
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
       
     restart: always
     
   postgresql_2:
-    image: 'cybergatelabs/postgres-multi-db'
-    container_name: postgresql
-    hostname: postgresql
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_2
+    hostname: postgresql_2
     volumes:
-      - './postgresql_data:/var/lib/postgresql/data'
+      - './postgresql_2_data:/bitnami/postgresql'
     networks:
       cybererp-network2:
         aliases:
-          - postgresql
+          - postgresql_2
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRES_MULTIPLE_DATABASES="odoo_customer1,odoo:odoo_customer2,odoo"
-      - POSTGRESQL_USER=odoo
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
       
     restart: always
     
@@ -80,7 +81,7 @@ services:
       - ODOO_PASSWORD=${ODOO_PASSWORD}
       - POSTGRESQL_USER=postgres
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql
+      - POSTGRESQL_HOST=postgresql_1
       - POSTGRESQL_PORT_NUMBER=5432
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=465
@@ -107,7 +108,7 @@ services:
       - ODOO_PASSWORD=${ODOO_PASSWORD}
       - POSTGRESQL_USER=postgres
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql
+      - POSTGRESQL_HOST=postgresql_2
       - POSTGRESQL_PORT_NUMBER=5432
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=465
