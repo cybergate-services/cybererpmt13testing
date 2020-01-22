@@ -28,6 +28,9 @@ services:
       cybererp-network2:
         aliases:
           - letsencrypt
+      cybererp-network3:
+        aliases:
+          - letsencrypt
     volumes:
      - ./letsencrypt/config:/config 
     ports:
@@ -68,6 +71,23 @@ services:
       - POSTGRESQL_USER=postgres
       
     restart: always
+   
+  postgresql_3:
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_3
+    hostname: postgresql_3
+    volumes:
+      - './postgresql_3_data:/bitnami/postgresql'
+    networks:
+      cybererp-network3:
+        aliases:
+          - postgresql_3
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
+      
+    restart: always 
     
   odoo_customer1:
     image: 'cybergatelabs/odoo12'
