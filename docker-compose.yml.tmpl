@@ -141,8 +141,34 @@ services:
          - odoo_customer2
     depends_on:
       - postgresql_2
-    restart: always  
-  
+    restart: always
+    
+  odoo_customer3:
+    image: 'cybergatelabs/odoo12'
+    container_name: odoo_customer3
+    hostname: odoo_customer3
+    volumes:  
+      - './odoo_data/customer3:/bitnami'
+      - './custom-addons/customer3/:/bitnami/odoo/addons/'
+    environment:
+      - ODOO_EMAIL=${ODOO_EMAIL}
+      - ODOO_PASSWORD=${ODOO_PASSWORD}
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_HOST=postgresql_3
+      - POSTGRESQL_PORT_NUMBER=5432
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=465
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PROTOCOL=ssl
+    networks:
+      cybererp-network3:
+        aliases:
+         - odoo_customer3
+    depends_on:
+      - postgresql_3
+    restart: always 
   pgadmin:
     image: adminer
     container_name: pgadmin
