@@ -284,7 +284,10 @@ services:
          - duplicati
       cybererp-network3:
         aliases:
-         - duplicati   
+         - duplicati
+      cybererp-network4:
+        aliases:
+         - duplicati
 volumes:
   postgresql_data:
     driver: local
@@ -318,7 +321,16 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.28.1.0/24  
+        - subnet: 172.28.1.0/24
+   cybererp-network4:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer4
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.1.0/24 
    
         
      
