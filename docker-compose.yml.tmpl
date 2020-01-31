@@ -189,6 +189,7 @@ services:
     depends_on:
       - postgresql_3
     restart: always
+    
   odoo_customer4:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer4
@@ -234,6 +235,9 @@ services:
       cybererp-network3:
         aliases:
           - pgadmin
+      cybererp-network4:
+        aliases:
+          - pgadmin
   portainer:
     image: portainer/portainer
     container_name: portainer
@@ -251,7 +255,10 @@ services:
          - portainer
       cybererp-network3:
         aliases:
-         - portainer  
+         - portainer
+      cybererp-network4:
+        aliases:
+         - portainer
   duplicati:
     image: linuxserver/duplicati
     container_name: duplicati
