@@ -31,6 +31,9 @@ services:
       cybererp-network3:
         aliases:
           - letsencrypt
+      cybererp-network4:
+        aliases:
+          - letsencrypt
     volumes:
      - ./letsencrypt/config:/config 
     ports:
@@ -82,6 +85,22 @@ services:
       cybererp-network3:
         aliases:
           - postgresql_3
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
+      
+    restart: always
+  postgresql_4:
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_4
+    hostname: postgresql_4
+    volumes:
+      - './postgresql_4_data:/bitnami/postgresql'
+    networks:
+      cybererp-network4:
+        aliases:
+          - postgresql_4
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=postgres
