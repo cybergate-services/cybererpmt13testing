@@ -235,6 +235,33 @@ services:
          - odoo_customer4
     depends_on:
       - postgresql_4
+    restart: always
+    
+  odoo_customer5:
+    image: 'cybergatelabs/odoo12'
+    container_name: odoo_customer5
+    hostname: odoo_customer5
+    volumes:  
+      - './odoo_data/customer5:/bitnami'
+      - './custom-addons/customer5/:/bitnami/odoo/addons/'
+    environment:
+      - ODOO_EMAIL=${ODOO_EMAIL}
+      - ODOO_PASSWORD=${ODOO_PASSWORD}
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_HOST=postgresql_5
+      - POSTGRESQL_PORT_NUMBER=5432
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=465
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PROTOCOL=ssl
+    networks:
+      cybererp-network5:
+        aliases:
+         - odoo_customer5
+    depends_on:
+      - postgresql_5
     restart: always 
   pgadmin:
     image: adminer
