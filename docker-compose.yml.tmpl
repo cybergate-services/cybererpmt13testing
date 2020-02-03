@@ -285,6 +285,9 @@ services:
       cybererp-network4:
         aliases:
           - pgadmin
+      cybererp-network5:
+        aliases:
+          - pgadmin
   portainer:
     image: portainer/portainer
     container_name: portainer
@@ -301,6 +304,9 @@ services:
         aliases:
          - portainer
       cybererp-network3:
+        aliases:
+         - portainer
+      cybererp-network4:
         aliases:
          - portainer
       cybererp-network4:
@@ -333,6 +339,9 @@ services:
         aliases:
          - duplicati
       cybererp-network4:
+        aliases:
+         - duplicati
+      cybererp-network5:
         aliases:
          - duplicati
 volumes:
@@ -377,7 +386,17 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.29.1.0/24 
+        - subnet: 172.29.1.0/24
+   cybererp-network5:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer5
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.1.0/24
+    
    
         
      
