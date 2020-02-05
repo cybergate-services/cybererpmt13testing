@@ -136,6 +136,7 @@ services:
     volumes:  
       - './odoo_data/customer1:/bitnami'
       - './custom-addons/customer1/:/bitnami/odoo/addons/'
+      - './custom-addons/custome1-uploads/:/bitnami/odoo/addons-uploads'
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
@@ -192,6 +193,7 @@ services:
     volumes:  
       - './odoo_data/customer3:/bitnami'
       - './custom-addons/customer3/:/bitnami/odoo/addons/'
+      - './custom-addons/custome3-uploads/:/bitnami/odoo/addons-uploads'
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
@@ -219,6 +221,7 @@ services:
     volumes:  
       - './odoo_data/customer4:/bitnami'
       - './custom-addons/customer4/:/bitnami/odoo/addons/'
+      - './custom-addons/custome4-uploads/:/bitnami/odoo/addons-uploads'
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
@@ -246,6 +249,7 @@ services:
     volumes:  
       - './odoo_data/customer5:/bitnami'
       - './custom-addons/customer5/:/bitnami/odoo/addons/'
+      - './custom-addons/custome5-uploads/:/bitnami/odoo/addons-uploads'
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
