@@ -163,6 +163,8 @@ services:
     volumes:  
       - './odoo_data/customer2:/bitnami'
       - './custom-addons/customer2/:/bitnami/odoo/addons/'
+      - './custom-addons/custome2-uploads/:/bitnami/odoo/addons-uploads'
+      
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
