@@ -6,10 +6,7 @@
 #    Author: Fasluca(<faslu@cybrosys.in>)
 #    you can modify it under the terms of the GNU AFFERO
 #    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
-#
-#    It is forbidden to publish, distribute, sublicense, or sell copies
-#    of the Software or modified copies of the Software.
-#
+
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -35,7 +32,7 @@
         'views/account_payment_view.xml',
     ],
     'images': ['static/description/pdc_banner.jpg'],
-    'license': 'LGPL-3',
+    'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
 }
