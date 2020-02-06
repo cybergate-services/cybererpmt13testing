@@ -365,6 +365,9 @@ services:
       cybererp-network5:
         aliases:
          - portainer
+      cybererp-network6:
+        aliases:
+         - portainer
   duplicati:
     image: linuxserver/duplicati
     container_name: duplicati
@@ -395,6 +398,9 @@ services:
         aliases:
          - duplicati
       cybererp-network5:
+        aliases:
+         - duplicati
+      cybererp-network6:
         aliases:
          - duplicati
 volumes:
