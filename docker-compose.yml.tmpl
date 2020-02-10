@@ -212,6 +212,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer3
     hostname: odoo_customer3
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer3:/bitnami'
       - './custom-addons/customer3/:/bitnami/odoo/addons/'
@@ -240,6 +241,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer4
     hostname: odoo_customer4
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer4:/bitnami'
       - './custom-addons/customer4/:/bitnami/odoo/addons/'
@@ -268,6 +270,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer5
     hostname: odoo_customer5
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer5:/bitnami'
       - './custom-addons/customer5/:/bitnami/odoo/addons/'
@@ -295,6 +298,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer6
     hostname: odoo_customer6
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer6:/bitnami'
       - './custom-addons/customer6/:/bitnami/odoo/addons/'
