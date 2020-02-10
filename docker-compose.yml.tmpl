@@ -153,6 +153,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer1
     hostname: odoo_customer1
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer1:/bitnami'
       - './custom-addons/customer1/:/bitnami/odoo/addons/'
@@ -181,6 +182,7 @@ services:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer2
     hostname: odoo_customer2
+    command:"chown odoo:odoo /bitnami/odoo/addons-uploads/"
     volumes:  
       - './odoo_data/customer2:/bitnami'
       - './custom-addons/customer2/:/bitnami/odoo/addons/'
