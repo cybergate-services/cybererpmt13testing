@@ -152,6 +152,23 @@ services:
       
     restart: always
     
+  postgresql_7:
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_7
+    hostname: postgresql_7
+    volumes:
+      - './postgresql_7_data:/bitnami/postgresql'
+    networks:
+      cybererp-network7:
+        aliases:
+          - postgresql_7
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
+      
+    restart: always
+    
   odoo_customer1:
     image: 'cybergatelabs/odoo12'
     container_name: odoo_customer1
