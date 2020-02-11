@@ -391,6 +391,9 @@ services:
       cybererp-network6:
         aliases:
           - pgadmin
+      cybererp-network7:
+        aliases:
+          - pgadmin
   portainer:
     image: portainer/portainer
     container_name: portainer
@@ -416,6 +419,9 @@ services:
         aliases:
          - portainer
       cybererp-network6:
+        aliases:
+         - portainer
+      cybererp-network7:
         aliases:
          - portainer
   duplicati:
@@ -451,6 +457,9 @@ services:
         aliases:
          - duplicati
       cybererp-network6:
+        aliases:
+         - duplicati
+      cybererp-network7:
         aliases:
          - duplicati
 volumes:
@@ -514,6 +523,15 @@ networks:
       driver: default
       config:
         - subnet: 172.31.1.0/24
+   cybererp-network7:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer7
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.32.1.0/24
     
    
         
