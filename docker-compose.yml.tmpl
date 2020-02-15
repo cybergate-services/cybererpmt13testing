@@ -28,21 +28,7 @@ services:
       cybererp-network2:
         aliases:
           - letsencrypt
-      cybererp-network3:
-        aliases:
-          - letsencrypt
-      cybererp-network4:
-        aliases:
-          - letsencrypt
-      cybererp-network5:
-        aliases:
-          - letsencrypt
-      cybererp-network6:
-        aliases:
-          - letsencrypt
-      cybererp-network7:
-        aliases:
-          - letsencrypt
+      
     volumes:
      - ./letsencrypt/config:/config 
     ports:
@@ -84,90 +70,7 @@ services:
       
     restart: always
    
-  postgresql_3:
-    image: 'bitnami/postgresql:11'
-    container_name: postgresql_3
-    hostname: postgresql_3
-    volumes:
-      - './postgresql_3_data:/bitnami/postgresql'
-    networks:
-      cybererp-network3:
-        aliases:
-          - postgresql_3
-    environment:
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
-      
-    restart: always
-    
-  postgresql_4:
-    image: 'bitnami/postgresql:11'
-    container_name: postgresql_4
-    hostname: postgresql_4
-    volumes:
-      - './postgresql_4_data:/bitnami/postgresql'
-    networks:
-      cybererp-network4:
-        aliases:
-          - postgresql_4
-    environment:
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
-      
-    restart: always
-    
-  postgresql_5:
-    image: 'bitnami/postgresql:11'
-    container_name: postgresql_5
-    hostname: postgresql_5
-    volumes:
-      - './postgresql_5_data:/bitnami/postgresql'
-    networks:
-      cybererp-network5:
-        aliases:
-          - postgresql_5
-    environment:
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
-      
-    restart: always
-    
-  postgresql_6:
-    image: 'bitnami/postgresql:11'
-    container_name: postgresql_6
-    hostname: postgresql_6
-    volumes:
-      - './postgresql_6_data:/bitnami/postgresql'
-    networks:
-      cybererp-network6:
-        aliases:
-          - postgresql_6
-    environment:
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
-      
-    restart: always
-    
-  postgresql_7:
-    image: 'bitnami/postgresql:11'
-    container_name: postgresql_7
-    hostname: postgresql_7
-    volumes:
-      - './postgresql_7_data:/bitnami/postgresql'
-    networks:
-      cybererp-network7:
-        aliases:
-          - postgresql_7
-    environment:
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_DATABASE=postgres
-      - POSTGRESQL_USER=postgres
-      
-    restart: always
+  
     
   odoo_customer1:
     image: 'cybergatelabs/odoo12'
@@ -226,143 +129,7 @@ services:
       - postgresql_2
     restart: always
     
-  odoo_customer3:
-    image: 'cybergatelabs/odoo12'
-    container_name: odoo_customer3
-    hostname: odoo_customer3
-    volumes:  
-      - './odoo_data/customer3:/bitnami'
-      - './custom-addons/customer3/:/bitnami/odoo/addons/'
-      - './custom-addons/custome3-uploads/:/bitnami/odoo/addons-uploads'
-    environment:
-      - ODOO_EMAIL=${ODOO_EMAIL}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_3
-      - POSTGRESQL_PORT_NUMBER=5432
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=465
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network3:
-        aliases:
-         - odoo_customer3
-    depends_on:
-      - postgresql_3
-    restart: always
-    
-  odoo_customer4:
-    image: 'cybergatelabs/odoo12'
-    container_name: odoo_customer4
-    hostname: odoo_customer4
-    volumes:  
-      - './odoo_data/customer4:/bitnami'
-      - './custom-addons/customer4/:/bitnami/odoo/addons/'
-      - './custom-addons/custome4-uploads/:/bitnami/odoo/addons-uploads'
-    environment:
-      - ODOO_EMAIL=${ODOO_EMAIL}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_4
-      - POSTGRESQL_PORT_NUMBER=5432
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=465
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network4:
-        aliases:
-         - odoo_customer4
-    depends_on:
-      - postgresql_4
-    restart: always
-    
-  odoo_customer5:
-    image: 'cybergatelabs/odoo12'
-    container_name: odoo_customer5
-    hostname: odoo_customer5
-    volumes:  
-      - './odoo_data/customer5:/bitnami'
-      - './custom-addons/customer5/:/bitnami/odoo/addons/'
-      - './custom-addons/custome5-uploads/:/bitnami/odoo/addons-uploads'
-    environment:
-      - ODOO_EMAIL=${ODOO_EMAIL}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_5
-      - POSTGRESQL_PORT_NUMBER=5432
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=465
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network5:
-        aliases:
-         - odoo_customer5
-    depends_on:
-      - postgresql_5
-    restart: always
-  odoo_customer6:
-    image: 'cybergatelabs/odoo12'
-    container_name: odoo_customer6
-    hostname: odoo_customer6
-    volumes:  
-      - './odoo_data/customer6:/bitnami'
-      - './custom-addons/customer6/:/bitnami/odoo/addons/'
-      - './custom-addons/custome6-uploads/:/bitnami/odoo/addons-uploads'
-    environment:
-      - ODOO_EMAIL=${ODOO_EMAIL}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_6
-      - POSTGRESQL_PORT_NUMBER=5432
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=465
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network6:
-        aliases:
-         - odoo_customer6
-    depends_on:
-      - postgresql_6
-    restart: always 
-  odoo_customer7:
-    image: 'cybergatelabs/odoo12'
-    container_name: odoo_customer7
-    hostname: odoo_customer7
-    volumes:  
-      - './odoo_data/customer7:/bitnami'
-      - './custom-addons/customer7/:/bitnami/odoo/addons/'
-      - './custom-addons/custome7-uploads/:/bitnami/odoo/addons-uploads'
-    environment:
-      - ODOO_EMAIL=${ODOO_EMAIL}
-      - ODOO_PASSWORD=${ODOO_PASSWORD}
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_7
-      - POSTGRESQL_PORT_NUMBER=5432
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=465
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - SMTP_PROTOCOL=ssl
-    networks:
-      cybererp-network7:
-        aliases:
-         - odoo_customer7
-    depends_on:
-      - postgresql_7
-    restart: always 
+  
   pgadmin:
     image: adminer
     container_name: pgadmin
@@ -379,21 +146,7 @@ services:
       cybererp-network2:
         aliases:
           - pgadmin
-      cybererp-network3:
-        aliases:
-          - pgadmin
-      cybererp-network4:
-        aliases:
-          - pgadmin
-      cybererp-network5:
-        aliases:
-          - pgadmin
-      cybererp-network6:
-        aliases:
-          - pgadmin
-      cybererp-network7:
-        aliases:
-          - pgadmin
+      
   portainer:
     image: portainer/portainer
     container_name: portainer
@@ -409,21 +162,7 @@ services:
       cybererp-network2:
         aliases:
          - portainer
-      cybererp-network3:
-        aliases:
-         - portainer
-      cybererp-network4:
-        aliases:
-         - portainer
-      cybererp-network5:
-        aliases:
-         - portainer
-      cybererp-network6:
-        aliases:
-         - portainer
-      cybererp-network7:
-        aliases:
-         - portainer
+      
   duplicati:
     image: linuxserver/duplicati
     container_name: duplicati
@@ -447,21 +186,7 @@ services:
       cybererp-network2:
         aliases:
          - duplicati
-      cybererp-network3:
-        aliases:
-         - duplicati
-      cybererp-network4:
-        aliases:
-         - duplicati
-      cybererp-network5:
-        aliases:
-         - duplicati
-      cybererp-network6:
-        aliases:
-         - duplicati
-      cybererp-network7:
-        aliases:
-         - duplicati
+      
 volumes:
   postgresql_data:
     driver: local
@@ -487,51 +212,7 @@ networks:
       driver: default
       config:
         - subnet: 172.27.1.0/24
-  cybererp-network3:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-customer3
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.28.1.0/24
-  cybererp-network4:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-customer4
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.29.1.0/24
-  cybererp-network5:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-customer5
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.30.1.0/24
-  cybererp-network6:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-customer6
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.31.1.0/24
-  cybererp-network7:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-customer7
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.32.1.0/24
+  
     
    
         
