@@ -31,10 +31,10 @@ services:
       cybererp-network3:
         aliases:
           - letsencrypt
-      cybererp-network4:
+      cybererp-sunmade:
         aliases:
           - letsencrypt
-      cybererp-network5:
+      cybererp-aptlk:
         aliases:
           - letsencrypt
       
@@ -98,14 +98,14 @@ services:
     
   postgresql_4:
     image: 'bitnami/postgresql:11'
-    container_name: postgresql_4
-    hostname: postgresql_4
+    container_name: postgresql_sunmade
+    hostname: postgresql_sunmade
     volumes:
-      - './postgresql_4_data:/bitnami/postgresql'
+      - './postgresql_sunmade_data:/bitnami/postgresql'
     networks:
-      cybererp-network4:
+      cybererp-sunmade:
         aliases:
-          - postgresql_4
+          - postgresql_sunmade
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=postgres
