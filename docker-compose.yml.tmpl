@@ -394,7 +394,25 @@ networks:
       driver: default
       config:
         - subnet: 172.28.1.0/24
-  
+  cybererp-sunmade:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer4
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.1.0/24
+   cybererp-aptlk:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer5
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.1.0/24
+    
     
    
         
