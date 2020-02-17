@@ -115,14 +115,14 @@ services:
     
   postgresql_5:
     image: 'bitnami/postgresql:11'
-    container_name: postgresql_5
-    hostname: postgresql_5
+    container_name: postgresql_aptlk
+    hostname: postgresql_aptlk
     volumes:
-      - './postgresql_5_data:/bitnami/postgresql'
+      - './postgresql_aptlk_data:/bitnami/postgresql'
     networks:
-      cybererp-network5:
+      cybererp-aptlk:
         aliases:
-          - postgresql_5
+          - postgresql_aptlk
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=postgres
