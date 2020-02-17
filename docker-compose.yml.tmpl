@@ -246,6 +246,35 @@ services:
       - postgresql_sunmade
     restart: always
     
+  odoo_customer5:
+    image: 'cybergatelabs/odoo13'
+    container_name: odoo_aptlk
+    hostname: odoo_aptlk
+    volumes:  
+      - './odoo_data/aptlk:/bitnami'
+      - './custom-addons/aptlk/:/bitnami/odoo/addons/'
+      - './custom-addons/aptlk-uploads/:/bitnami/odoo/addons-uploads'
+      
+    environment:
+      - ODOO_EMAIL=${ODOO_EMAIL}
+      - ODOO_PASSWORD=${ODOO_PASSWORD}
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_HOST=postgresql_aptlk
+      - POSTGRESQL_PORT_NUMBER=5432
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=465
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PROTOCOL=ssl
+    networks:
+      cybererp-aptlk:
+        aliases:
+         - odoo_aptlk
+    depends_on:
+      - postgresql_aptlk
+    restart: always
+    
   
   pgadmin:
     image: adminer
