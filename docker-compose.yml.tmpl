@@ -95,6 +95,23 @@ services:
       - POSTGRESQL_USER=postgres
       
     restart: always 
+    
+  postgresql_4:
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_4
+    hostname: postgresql_4
+    volumes:
+      - './postgresql_4_data:/bitnami/postgresql'
+    networks:
+      cybererp-network4:
+        aliases:
+          - postgresql_4
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
+      
+    restart: always 
   
     
   odoo_customer1:
