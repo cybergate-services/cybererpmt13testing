@@ -402,6 +402,9 @@ services:
       cybererp-cybergate:
         aliases:
           - pgadmin
+      cybererp-digitalinfomedia:
+        aliases:
+          - pgadmin
       
   portainer:
     image: portainer/portainer
@@ -428,6 +431,9 @@ services:
         aliases:
          - portainer
       cybererp-cybergate:
+        aliases:
+         - portainer
+      cybererp-digitalinfomedia:
         aliases:
          - portainer
       
@@ -464,6 +470,9 @@ services:
         aliases:
          - duplicati
       cybererp-cybergate:
+        aliases:
+         - duplicati
+      cybererp-digitalinfomedia:
         aliases:
          - duplicati
       
@@ -528,6 +537,15 @@ networks:
       driver: default
       config:
         - subnet: 172.31.1.0/24
+  cybererp-digitalinfomedia:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-customer7
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.32.1.0/24
     
     
    
