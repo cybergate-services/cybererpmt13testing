@@ -344,6 +344,35 @@ services:
       - postgresql_cybergate
     restart: always
     
+  odoo_digitalinfomedia:
+    image: 'cybergatelabs/odoo13'
+    container_name: odoo_digitalinfomedia
+    hostname: odoo_digitalinfomedia
+    volumes:  
+      - './odoo_data/digitalinfomedia:/bitnami'
+      - './custom-addons/digitalinfomedia/:/bitnami/odoo/addons/'
+      - './custom-addons/digitalinfomedia-uploads/:/bitnami/odoo/addons-uploads'
+      
+    environment:
+      - ODOO_EMAIL=${ODOO_EMAIL}
+      - ODOO_PASSWORD=${ODOO_PASSWORD}
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_HOST=postgresql_digitalinfomedia
+      - POSTGRESQL_PORT_NUMBER=5432
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=465
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PROTOCOL=ssl
+    networks:
+      cybererp-digitalinfomedia:
+        aliases:
+         - odoo_digitalinfomedia
+    depends_on:
+      - postgresql_digitalinfomedia
+    restart: always
+    
   
   pgadmin:
     image: adminer
