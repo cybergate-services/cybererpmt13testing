@@ -31,4 +31,21 @@ services:
       - 443:443
       - 80:80 #optional
     restart: always
+    
+  postgresql_1:
+    image: 'bitnami/postgresql:11'
+    container_name: postgresql_1
+    hostname: postgresql_1
+    volumes:
+      - './postgresql_1_data:/bitnami/postgresql'
+    networks:
+      cybererp-network1:
+        aliases:
+          - postgresql_1
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres
+      - POSTGRESQL_USER=postgres
+      
+    restart: always
      
