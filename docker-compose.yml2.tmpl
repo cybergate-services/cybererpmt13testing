@@ -1,3 +1,5 @@
+
+
 version: '2.1'
 services:
  
@@ -21,7 +23,7 @@ services:
       - STAGING=${STAGING}
       
     networks:
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
           - letsencrypt 
           
@@ -32,16 +34,16 @@ services:
       - 80:80 #optional
     restart: always
     
-  postgresql_1:
+  postgresql_$customer:
     image: 'bitnami/postgresql:11'
-    container_name: postgresql_1
-    hostname: postgresql_1
+    container_name: postgresql_$customer
+    hostname: postgresql_$customer
     volumes:
-      - './postgresql_1_data:/bitnami/postgresql'
+      - './postgresql_$customer_data:/bitnami/postgresql'
     networks:
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
-          - postgresql_1
+          - postgresql_$customer
     environment:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
       - POSTGRESQL_DATABASE=postgres
@@ -49,20 +51,20 @@ services:
       
     restart: always
     
-  odoo_customer1:
+  odoo_$customer:
     image: 'cybergatelabs/odoo13'
-    container_name: odoo_customer1
-    hostname: odoo_customer1
+    container_name: odoo_$customer
+    hostname: odoo_$customer
     volumes:  
-      - './odoo_data/customer1:/bitnami'
-      - './custom-addons/customer1/:/bitnami/odoo/addons/'
-      - './custom-addons/custome1-uploads/:/bitnami/odoo/addons-uploads'
+      - './odoo_data/$customer:/bitnami'
+      - './custom-addons/$customer/:/bitnami/odoo/addons/'
+      - './custom-addons/$customer-uploads/:/bitnami/odoo/addons-uploads'
     environment:
       - ODOO_EMAIL=${ODOO_EMAIL}
       - ODOO_PASSWORD=${ODOO_PASSWORD}
       - POSTGRESQL_USER=postgres
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - POSTGRESQL_HOST=postgresql_1
+      - POSTGRESQL_HOST=postgresql_$customer
       - POSTGRESQL_PORT_NUMBER=5432
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=465
@@ -70,11 +72,11 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_PROTOCOL=ssl
     networks:    
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
-         - odoo_customer1
+         - odoo_$customer
     depends_on:
-      - postgresql_1
+      - postgresql_$customer
     restart: always 
     
   pgadmin:
@@ -87,7 +89,7 @@ services:
     # depends_on:
     #  - postgresql
     networks:
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
           - pgadmin
           
@@ -100,7 +102,7 @@ services:
       - ./conf/portainer:/data
     restart: always
     networks:
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
          - portainer
          
@@ -121,7 +123,7 @@ services:
       - 8200:8200
     restart: always
     networks:
-      cybererp-network1:
+      cybererp-$customer:
         aliases:
          - duplicati
           
@@ -133,15 +135,12 @@ volumes:
     driver: local
     
 networks:
-  cybererp-network1:
+  cybererp-$customer:
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: br-customer1
+      com.docker.network.bridge.name: br-$customer
     enable_ipv6: false
     ipam:
       driver: default
       config:
         - subnet: 172.26.1.0/24          
-   
-    
-     
