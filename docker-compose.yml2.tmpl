@@ -103,6 +103,27 @@ services:
       cybererp-network1:
         aliases:
          - portainer
+         
+  duplicati:
+    image: linuxserver/duplicati
+    container_name: duplicati
+    hostname: duplicati
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - CLI_ARGS= #optional
+    volumes:
+      - ./config/dupicati:/config
+      - /opt/backup/duplicati:/backups
+      - ./:/source
+    ports:
+      - 8200:8200
+    restart: always
+    networks:
+      cybererp-network1:
+        aliases:
+         - duplicati
           
    
           
